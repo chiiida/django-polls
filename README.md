@@ -1,7 +1,6 @@
 # Django Polls
 
-## About this project
-A Django tutorials to create a polls.
+This a web application create with Django tutorials to create polls that can vote, keep track of the number of votes, and display a result.
 [source](https://docs.djangoproject.com/en/2.2/intro/)
 
 ## Each parts of tutorials done checklist
