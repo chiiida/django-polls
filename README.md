@@ -14,8 +14,11 @@ This a web application create with Django tutorials to create polls that can vot
 
 ```
 git clone https://github.com/llleyelll/django-polls.git
+
 cd django-polls
+
 pip3 install -r requirements.txt
+
 python3 manage.py runserver
 ```
 
