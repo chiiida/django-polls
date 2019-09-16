@@ -22,3 +22,19 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
+def vote_count(id):
+    """Return total votes for a given poll. id is poll id"""
+    # Hint: get the question from the database 
+    #       Easiest is use Question.objects.get(...) 
+    # question has a choice_set attribute that is a set of choices
+    # for that question.
+    question = Question.objects.get(pk=id)
+    total_votes = [choice.votes for choice in question.choice_set.all()]
+    return sum(total_votes)
+
+def find_polls_for_text(text):
+    """Return list of Question objects for all polls containing some text"""        
+    # Hint: Question.objects.filter( expression )
+    # and use the relations question_text__contains or __icontains
+    return Question.objects.filter(question_text__contains=text)
