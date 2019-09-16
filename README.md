@@ -17,9 +17,15 @@ git clone https://github.com/llleyelll/django-polls.git
 
 cd django-polls
 
-pip3 install -r requirements.txt
+On MacOS/Linux:
+    pip3 install -r requirements.txt
+    
+    python3 manage.py runserver
 
-python3 manage.py runserver
+On Windows:
+    pip install -r requirements.txt
+
+    python manage.py runserver
 ```
 
 ## Author
