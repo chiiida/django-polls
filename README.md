@@ -1,6 +1,6 @@
 # Django Polls Application
 
-This a web application create with Django tutorials to create polls that can vote, keep track of the number of votes, and display a result.
+This is a web application create with Django tutorials to create polls that can vote, keep track of the number of votes, and display a result of poll.
 [source](https://docs.djangoproject.com/en/2.2/intro/)
 
  ## Requirements
@@ -12,23 +12,31 @@ This a web application create with Django tutorials to create polls that can vot
 
  ## How to run
 
-```
-git clone https://github.com/llleyelll/django-polls.git
+1. Clone this repository
 
-cd django-polls
+    ```
+    git clone https://github.com/llleyelll/django-polls.git
+    ```
+2. Go to django-polls directory
 
-On MacOS/Linux:
+    ```
+    cd django-polls
+    ```
+3. Make sure you have all requirements and then run server
 
-    pip3 install -r requirements.txt
+    ```
+    On MacOS/Linux:
 
-    python3 manage.py runserver
+        pip3 install -r requirements.txt
 
-On Windows:
+        python3 manage.py runserver
 
-    pip install -r requirements.txt
+    On Windows:
 
-    python manage.py runserver
-```
+        pip install -r requirements.txt
+
+        python manage.py runserver
+    ```
 
 ## Author
  -  Chananchida Fuachai 6110545473
