@@ -12,15 +12,18 @@ This is a web application create with Django tutorials to create polls that can 
 
  ## How to run
 
-1. Clone this repository.
+1. Clone this repository
+
     ```
     git clone https://github.com/llleyelll/django-polls.git
     ```
-2. Go to django-polls directory.
+2. Go to django-polls directory
+
     ```
     cd django-polls
     ```
-3. Make sure you have all requirements and then run server.
+3. Make sure you have all requirements and then run server
+
     ```
     On MacOS/Linux:
 
