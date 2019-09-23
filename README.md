@@ -58,6 +58,10 @@ This is a web application create with Django tutorials to create polls that can 
 
         python manage.py runserver
     ```
+3. Navigate to the polls.
+    ```
+    localhost:8000/polls or 127.0.0.1:8000/polls
+    ```
 
 ## Author
  -  Chananchida Fuachai 6110545473
