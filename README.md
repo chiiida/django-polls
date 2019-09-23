@@ -24,7 +24,7 @@ This is a web application create with Django tutorials to create polls that can 
     cd django-polls
     ```
 
-3. Make sure you have all dependencies and then run database migrations.
+3. Make sure you have all dependencies and then run database migrations by the following commands.
 
     ```
     On MacOS/Linux:
@@ -39,15 +39,16 @@ This is a web application create with Django tutorials to create polls that can 
 
         python manage.py migrate
     ```
+4. In the project directory root create `.env` and configure settings value for Django.
+    > `.env` should contains SECRET_KEY, DEBUG, ALLOWED_HOSTS, TIMEZONE
 
 ## Running
 
 1. Make sure you have the right current **django-polls** directory.
-
-    ```
-    cd django-polls
-    ```
-2. Run server *(if you want to change the server's port, pass it as a command-line argument. Ex: `python3 manage.py runserver 8080`)*
+2. Run server 
+    >if you want to change the server's port, pass it as a command-line argument. 
+    >
+    >Example: `python3 manage.py runserver 8080`
 
     ```
     On MacOS/Linux:
@@ -59,9 +60,8 @@ This is a web application create with Django tutorials to create polls that can 
         python manage.py runserver
     ```
 3. Navigate to the polls.
-    ```
-    localhost:8000/polls or 127.0.0.1:8000/polls
-    ```
+    
+    `localhost:8000/polls` or `127.0.0.1:8000/polls`
 
 ## Author
  -  Chananchida Fuachai 6110545473
