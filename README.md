@@ -40,7 +40,11 @@ This is a web application create with Django tutorials to create polls that can 
         python manage.py migrate
     ```
 4. In the project directory root create `.env` and configure settings value for Django.
-    > `.env` should contains SECRET_KEY, DEBUG, ALLOWED_HOSTS, TIMEZONE
+    > `.env` should contains these following <br/>
+    > SECRET_KEY = yoursecretkey<br/>
+    > DEBUG = True <br/>
+    > ALLOWED_HOSTS = * (Allow all sites to access) <br/>
+    > TIMEZONE = Asia/Bangkok (or your own) <br/>
 
 ## Running
 
@@ -59,9 +63,9 @@ This is a web application create with Django tutorials to create polls that can 
 
         python manage.py runserver
     ```
-3. Navigate to the polls.
+3. Navigate to the server. (Go to the polls at `polls/`)
     
-    `localhost:8000/polls` or `127.0.0.1:8000/polls`
+    `http://localhost:8000/` or `http://127.0.0.1:8000/`
 
 ## Author
  -  Chananchida Fuachai 6110545473
