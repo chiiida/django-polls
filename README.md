@@ -49,8 +49,7 @@ This is a web application create with Django tutorials to create polls that can 
 
 1. Make sure you have the right current **django-polls** directory.
 2. Run server 
-    >if you want to change the server's port, pass it as a command-line argument. 
-    >
+    >if you want to change the server's port, pass it as a command-line argument. <br/>
     >Example: `python3 manage.py runserver 8080`
 
     ```
