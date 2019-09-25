@@ -39,11 +39,11 @@ This is a web application create with Django tutorials to create polls that can 
 
         python manage.py migrate
     ```
-4. In the project directory root create `.env` that contains these following settings.
+<!-- 4. In the project directory root create `.env` that contains these following settings.
     > SECRET_KEY = yoursecretkey <br/>
     > DEBUG = True <br/>
     > ALLOWED_HOSTS = * (Allow all sites to access) <br/>
-    > TIMEZONE = Asia/Bangkok (or your own) <br/>
+    > TIMEZONE = Asia/Bangkok (or your own) <br/> -->
 
 ## Running
 
