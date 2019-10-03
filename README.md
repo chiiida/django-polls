@@ -15,13 +15,13 @@ This is a web application create with Django tutorials to create polls that can 
 1. Clone this repository
 
     ```
-    git clone https://github.com/llleyelll/django-polls.git
+    $ git clone https://github.com/llleyelll/django-polls.git
     ```
 
 2. Go to django-polls directory
 
     ```
-    cd django-polls
+    $ cd django-polls
     ```
 
 3. Make sure you have all dependencies and then run database migrations by the following commands.
@@ -29,15 +29,15 @@ This is a web application create with Django tutorials to create polls that can 
     ```
     On MacOS/Linux:
 
-        pip3 install -r requirements.txt
+        $ pip3 install -r requirements.txt
 
-        python3 manage.py migrate
+        $ python3 manage.py migrate
 
     On Windows:
 
-        pip install -r requirements.txt
+        $ pip install -r requirements.txt
 
-        python manage.py migrate
+        $ python manage.py migrate
     ```
 4. In the project directory root create `.env` that contains SECRET_KEY, DEBUG, ALLOWED_HOSTS, and TIMEZONE.
     <!-- > SECRET_KEY = yoursecretkey <br/>
@@ -55,11 +55,11 @@ This is a web application create with Django tutorials to create polls that can 
     ```
     On MacOS/Linux:
 
-        python3 manage.py runserver
+        $ python3 manage.py runserver
 
     On Windows:
 
-        python manage.py runserver
+        $ python manage.py runserver
     ```
 3. Navigate to the server. (Go to the polls at `polls/`)
     
