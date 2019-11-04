@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.test import TestCase
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 from .models import Choice, Question
 import logging
@@ -34,6 +36,7 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
+@login_required(login_url='/accounts/login/')
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
