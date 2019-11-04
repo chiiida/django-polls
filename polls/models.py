@@ -9,6 +9,9 @@ class Question(models.Model):
 
     def __str__(self):
         return self.question_text
+    
+    def sorted_votes(self):
+        return self.choice_set.all().order_by('-votes')
 
     def was_published_recently(self):
         now = timezone.now()
@@ -22,13 +25,3 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
-
-def vote_count(id):
-    """Return total votes for a given poll. id is poll id"""
-    question = Question.objects.get(pk=id)
-    total_votes = [choice.votes for choice in question.choice_set.all()]
-    return sum(total_votes)
-
-def find_polls_for_text(text):
-    """Return list of Question objects for all polls containing some text"""
-    return Question.objects.filter(question_text__contains=text)
