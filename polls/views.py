@@ -62,9 +62,9 @@ def find_polls_for_text(text):
     """Return list of Question objects for all polls containing some text"""
     return list(Question.objects.filter(question_text__contains=text))
 
-# def error_404_view(request, exception):
-#     data = {"name": "Chananchida"}
-#     return render(request,'polls/error_404.html', data)
+def error_404_view(request, exception):
+    data = {"name": "Chananchida"}
+    return render(request,'polls/error_404.html', data)
 
 def log_test(logger):
     logger.debug('This is a debug message')
