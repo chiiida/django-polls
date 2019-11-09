@@ -3,18 +3,22 @@
     font-weight: normal;
 }
 
-table {
+.result {
     border-collapse: collapse;
 }
 
-table, th, td {
+.result, th, td {
     border: 1px solid black;
 }
 
-table .title {
+.result .title {
     color: white;
     background: rgb(44, 58, 71);
 }
-table .tableele {
+.result .tableele {
     background: white;
+}
+
+button {
+    margin: 10px;
 }

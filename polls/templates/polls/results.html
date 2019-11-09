@@ -1,9 +1,9 @@
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 
 <h1>{{ question.question_text }}</h1>
 
-<table>
+<table class="result">
     <tr class="title">
         <th>Choice</th>
         <th>Votes</th>
@@ -16,5 +16,7 @@
     {% endfor %}
 </table>
 
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
-<a href="{% url 'polls:index' %}">[ Back ]</a>
+{% if user.is_authenticated %}
+<button><a href="{% url 'polls:detail' question.id %}">Vote again?</a></button>
+{% endif %}
+<button><a href="{% url 'polls:index' %}"> Back </a></button>
