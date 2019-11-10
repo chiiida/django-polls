@@ -8,12 +8,16 @@
 {% if user.is_authenticated %}
 <form action="{% url 'polls:vote' question.id %}" method="post">
 {% else %}
-<form></form>
+<form>
 {% endif %}
 
 {% csrf_token %}
 {% for choice in question.choice_set.all %}
+    {% if choice.id == vote %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" checked>
+    {% else %}
     <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+    {% endif %}
     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
 {% endfor %}
 
@@ -23,3 +27,6 @@
     Please <a href="{% url 'login'%}?next={{request.path}}">Login</a> to vote.
 {% endif %}
 </form>
+
+<button><a href="{% url 'polls:results' question.pk %}">View results</a></button>
+<button><a href="{% url 'polls:index' %}"> View polls </a></button>

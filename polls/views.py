@@ -1,14 +1,16 @@
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, render_to_response
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
-from django.test import TestCase
+from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
-from .models import Choice, Question
+from .models import Choice, Question, Vote
 import logging
+
+LOGGER = logging.getLogger(__name__)
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -19,6 +21,7 @@ class IndexView(generic.ListView):
         Return the last five published questions (not including those set to be
         published in the future).
         """
+        LOGGER.info("Return questions by date")
         return Question.objects.filter(pub_date__lte=timezone.now()
                                        ).order_by('-pub_date')[:5]
 
@@ -31,6 +34,15 @@ class DetailView(generic.DetailView):
         Excludes any questions that aren't published yet.
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            try:
+                context['vote'] = Vote.objects.get(user=self.request.user, question_id=int(self.kwargs['pk'])).choice.id
+            except Vote.DoesNotExist:
+                pass
+        return context
 
 class ResultsView(generic.DetailView):
     model = Question
@@ -48,8 +60,17 @@ def vote(request, question_id):
             'error_message': "You didn't select a choice.",
         })
     else:
-        selected_choice.votes += 1
-        selected_choice.save()
+        is_vote = list(Vote.objects.filter(user=request.user).filter(question=question))
+        if is_vote:
+            vote = is_vote[0]
+            vote.choice.votes -= 1
+            vote.choice.save()
+            vote.choice = selected_choice
+        else:
+            vote = Vote(question=question, choice=selected_choice, user=request.user)
+        vote.save()
+        vote.choice.votes += 1
+        vote.choice.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
 def vote_count(id):
@@ -62,13 +83,7 @@ def find_polls_for_text(text):
     """Return list of Question objects for all polls containing some text"""
     return list(Question.objects.filter(question_text__contains=text))
 
-# def error_404_view(request, exception):
-#     data = {"name": "Chananchida"}
-#     return render(request,'polls/error_404.html', data)
-
-def log_test(logger):
-    logger.debug('This is a debug message')
-    logger.info('This is an info message')
-    logger.warning('You have been warned')
-    logger.error('This is an error')
-    logger.critical('Something TERRIBLE happened.')
+def handler404(request, exception, template_name="404.html"):
+    response = render_to_response("404.html")
+    response.status_code = 404
+    return response

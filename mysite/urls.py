@@ -9,3 +9,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
 ]
+
+handler404 = 'polls.views.handler404'
