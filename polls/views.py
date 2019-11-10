@@ -7,7 +7,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
-from .models import Choice, Question
+from .models import Choice, Question, Vote
 import logging
 
 LOGGER = logging.getLogger(__name__)
@@ -51,8 +51,17 @@ def vote(request, question_id):
             'error_message': "You didn't select a choice.",
         })
     else:
-        selected_choice.votes += 1
-        selected_choice.save()
+        is_vote = list(Vote.objects.filter(user=request.user).filter(question=question))
+        if is_vote:
+            vote = is_vote[0]
+            vote.choice.votes -= 1
+            vote.choice.save()
+            vote.choice = selected_choice
+        else:
+            vote = Vote(question=question, choice=selected_choice, user=request.user)
+        vote.save()
+        vote.choice.votes += 1
+        vote.choice.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
 def vote_count(id):
