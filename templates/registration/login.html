@@ -1,3 +1,6 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
 <html>
 
 <body>
@@ -7,10 +10,15 @@
         <table border='0'>
             {{ form.as_table }}
         </table>
+        {% if form.errors %}
+            <p>Your username or password was incorrect. Please try again.</p>
+        {% endif %}
         <button type="submit">Login</button>
         <input type="hidden" name="next" value="{{next}}" />
     </form>
-    {# If you have written a password_reset template, then #}
+    <p>
+        <a href="{% url 'signup' %}">Don't have account yet?</a>
+    </p>
     <p>
         <a href="{% url 'password_reset' %}">Forgot password?</a>
     </p>
