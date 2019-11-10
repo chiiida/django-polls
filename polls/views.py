@@ -21,7 +21,7 @@ class IndexView(generic.ListView):
         Return the last five published questions (not including those set to be
         published in the future).
         """
-        LOGGER.info("Retrieved questions by date")
+        LOGGER.info("Return questions by date")
         return Question.objects.filter(pub_date__lte=timezone.now()
                                        ).order_by('-pub_date')[:5]
 
@@ -34,6 +34,15 @@ class DetailView(generic.DetailView):
         Excludes any questions that aren't published yet.
         """
         return Question.objects.filter(pub_date__lte=timezone.now())
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            try:
+                context['vote'] = Vote.objects.get(user=self.request.user, question_id=int(self.kwargs['pk'])).choice.id
+            except Vote.DoesNotExist:
+                pass
+        return context
 
 class ResultsView(generic.DetailView):
     model = Question
