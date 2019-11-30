@@ -87,12 +87,6 @@ class AuthTest(TestCase):
         expect_url = reverse('polls:results', args=[self.q1.id])
         self.assertRedirects(response, expect_url)
         # retrograde manual confirmation of voting
-        print("After vote")
-        for choice in self.q1.choice_set.all():
-            print(choice, "votes:", choice.votes)
         # vote again
         response = self.client.post( vote_url, {'choice':'2'})
         self.assertEqual(response.status_code, 302)
-        print("After second vote")
-        for choice in self.q1.choice_set.all():
-            print(choice, "votes:", choice.votes)

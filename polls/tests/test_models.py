@@ -3,8 +3,9 @@ import datetime
 from django.test import TestCase
 from django.utils import timezone
 from django.urls import reverse
+from django.contrib.auth.models import User
 
-from polls.models import Question
+from polls.models import Question, Choice, Vote
 
 def create_question(question_text, days):
     """
@@ -43,3 +44,21 @@ class QuestionModelTests(TestCase):
         time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
         recent_question = Question(pub_date=time)
         self.assertIs(recent_question.was_published_recently(), True)
+
+
+class ChoiceModelTests(TestCase):
+
+    def test_string_representation(self):
+        choice = Choice(choice_text="Harry Potter")
+        self.assertEqual('Harry Potter', str(choice))
+
+
+class VoteModelTests(TestCase):
+
+    def test_string_representation(self):
+        question = create_question(question_text="Who is the best wizard?", days=-30)
+        choice = Choice.objects.create(question=question, choice_text="Harry Potter")
+        user = User.objects.create_user(username="muggle", password="harry101")
+        vote = Vote.objects.create(question=question, choice=choice, user=user)
+        self.assertEqual(
+            'muggle: Who is the best wizard? – Harry Potter', str(vote))

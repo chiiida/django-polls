@@ -1,6 +1,8 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 
+<h1>Polls</h1>
+
 {% if user.is_authenticated %}
 Welcome back,
     {% if user.first_name != '' %}

@@ -34,4 +34,4 @@ class Vote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.user}: {self.question}"
+        return f"{self.user}: {self.question} – {self.choice}"
