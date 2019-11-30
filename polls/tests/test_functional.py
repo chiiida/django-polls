@@ -49,7 +49,31 @@ class PollsFunctionalTest(LiveServerTestCase):
       self.browser.get(self.live_server_url + '/polls/')
       tag_element = self.browser.find_element_by_tag_name('h1')
       self.assertEqual('Polls', tag_element.text)
-   
-   def test_question_on_index(self):
-      pass
-      # self.browser.get(self.live_server_url + "polls:index")
+
+   def test_find_poll_question_on_index(self):
+      question = create_question(question_text='How old are you?', days=0)
+      self.browser.get(self.live_server_url + '/polls/')
+      element = self.browser.find_element_by_id(f"question-{question.id}")
+      self.assertEqual('How old are you?', element.text)
+
+   def test_click_on_hyperlink(self):
+      question = create_question(question_text='How old are you?', days=0)
+      self.browser.get(self.live_server_url + '/polls/')
+      self.browser.find_element_by_id(f"question-{question.id}").click()
+      expected_url = self.live_server_url + \
+         '/polls/' + str(question.id) + '/'
+      self.assertEqual(self.browser.current_url, expected_url)
+
+   def test_click_on_first_vote(self):
+      question = create_question(question_text='How old are you?', days=0)
+      choice = Choice.objects.create(
+         question=question, choice_text='Very good')
+      print(self.browser.current_url)
+      self.setup_user()
+      self.browser.get(self.live_server_url +
+                       '/polls/' + str(question.id) + '/')
+      self.browser.find_element_by_id(f'choice{choice.id}').click()
+      self.browser.find_element_by_id('vote-btn').click()
+      expected_url = self.live_server_url + \
+         '/polls/' + str(question.id) + '/results/'
+      self.assertEqual(self.browser.current_url, expected_url)
